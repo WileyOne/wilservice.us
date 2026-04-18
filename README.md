@@ -2,6 +2,9 @@
 
 IT support site for small businesses and home users: computer repair, lessons, network management, security, identity, and personal security (passwords, online safety, trusted assistant).
 
+**Repository:** [github.com/WileyOne/wilservice.us](https://github.com/WileyOne/wilservice.us)  
+**Container image (TrueNAS / GHCR):** `ghcr.io/wileyone/wilservice.us:latest`
+
 ## Contents
 
 - **index.html**: Single-page site: hero, services, why us, contact form

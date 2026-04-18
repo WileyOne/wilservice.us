@@ -1,5 +1,7 @@
 # Putting your site in a “container” (simple explanation)
 
+**Source repo:** [github.com/WileyOne/wilservice.us](https://github.com/WileyOne/wilservice.us)
+
 **Goal:** TrueNAS runs your website from a **ready-made package** (an **image**) instead of a normal folder on the disk.
 
 You need **Docker Desktop** on your Mac once: [Docker Desktop for Mac](https://www.docker.com/products/docker-desktop/). Open it and leave it running while you work.
@@ -28,10 +30,10 @@ You need **Docker Desktop** on your Mac once: [Docker Desktop for Mac](https://w
 
 ## Step 2 — Log in from the Mac
 
-Open **Terminal**. Use your **GitHub username** (not email) where it says `YOUR_GITHUB_LOGIN`:
+Open **Terminal**. For this project the GitHub user is **`WileyOne`**:
 
 ```bash
-docker login ghcr.io -u YOUR_GITHUB_LOGIN
+docker login ghcr.io -u WileyOne
 ```
 
 When it asks for **Password**, paste the **token** from Step 1.
@@ -40,12 +42,10 @@ When it asks for **Password**, paste the **token** from Step 1.
 
 ## Step 3 — Build and upload
 
-Still in Terminal, replace **`YOUR_GITHUB_LOGIN`** in **both** places in the first line:
-
 ```bash
 cd "/Users/dadewilson/Documents/Cursor/wilservice.us"
 
-export IMAGE=ghcr.io/YOUR_GITHUB_LOGIN/wilservice-us:latest
+export IMAGE=ghcr.io/wileyone/wilservice.us:latest
 docker build --platform linux/amd64 -t "$IMAGE" .
 docker push "$IMAGE"
 ```
@@ -59,7 +59,7 @@ docker push "$IMAGE"
 
 In **Apps** → **Custom App**:
 
-- **Image:** `ghcr.io/YOUR_GITHUB_LOGIN/wilservice-us:latest` (your real username).
+- **Image:** `ghcr.io/wileyone/wilservice.us:latest`
 - **Port:** host **8080** → container **80**.
 - **No** extra disk mount for the website.
 
