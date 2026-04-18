@@ -1,0 +1,9 @@
+.DS_Store
+*.log
+node_modules/
+
+# Secrets and local certs — never commit
+Certs/
+*.pem
+.env
+.env.*

@@ -1,0 +1,44 @@
+# Caddy config for wilservice.us (static site)
+# Copy to Caddy's config: sudo cp configs/Caddyfile.example /etc/caddy/Caddyfile
+# Then: sudo systemctl reload caddy   (or restart)
+#
+# Certificates (copied to server): /var/www/wilservice.us/Certs/
+#   Origin.crt  = certificate (PEM format: -----BEGIN CERTIFICATE----- ... -----END CERTIFICATE-----)
+#   Private.key = private key (PEM format: -----BEGIN PRIVATE KEY----- ... -----END PRIVATE KEY-----)
+#   MUST be plain-text PEM. If you see "failed to find any PEM data", the files are wrong format
+#   (e.g. RTF from TextEdit). Re-save as "Plain Text" or export PEM from Keychain/openssl.
+
+# -----------------------------------------------------------------------------
+# Option A: Local / LAN only (no domain). Use this if you access via IP.
+# Caddy will NOT try to get HTTPS certs. No errors from Let's Encrypt.
+# -----------------------------------------------------------------------------
+:80 {
+    root * /var/www/wilservice.us
+    try_files {path} /index.html
+    file_server
+    encode gzip
+}
+
+# -----------------------------------------------------------------------------
+# Option B: HTTPS on 443 with your own certificates (PEM only: Origin.crt + Private.key)
+# Uncomment the block below ONLY after Origin.crt and Private.key are plain-text PEM.
+# Then: sudo cp this file to /etc/caddy/Caddyfile, sudo systemctl reload caddy, ufw allow 443
+# -----------------------------------------------------------------------------
+# :443 {
+#     tls /var/www/wilservice.us/Certs/Origin.crt /var/www/wilservice.us/Certs/Private.key
+#     root * /var/www/wilservice.us
+#     try_files {path} /index.html
+#     file_server
+#     encode gzip
+# }
+
+# -----------------------------------------------------------------------------
+# Option C: With domain. Automatic Let's Encrypt (requires public DNS).
+# Comment out Option A and use this block instead if you want auto HTTPS:
+# -----------------------------------------------------------------------------
+# wilservice.us, www.wilservice.us {
+#     root * /var/www/wilservice.us
+#     try_files {path} /index.html
+#     file_server
+#     encode gzip
+# }

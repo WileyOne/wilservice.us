@@ -1,0 +1,11 @@
+.git
+.gitignore
+.dockerignore
+Dockerfile
+*.md
+**/*.md
+docs
+configs
+Certs
+deploy.sh
+PUBLISH-IMAGE.md
